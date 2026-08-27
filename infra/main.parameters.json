@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "${AZURE_ENV_NAME}"
+    },
+    "location": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "gpuProfileType": {
+      "value": "${GPU_PROFILE_TYPE}"
+    },
+    "modelId": {
+      "value": "${MODEL_ID}"
+    },
+    "servedModelName": {
+      "value": "${SERVED_MODEL_NAME}"
+    },
+    "huggingFaceToken": {
+      "value": "${HUGGING_FACE_TOKEN}"
+    },
+    "proxyAuthPassword": {
+      "value": "${PROXY_AUTH_PASSWORD}"
+    },
+    "imageRegistryResourceGroup": {
+      "value": "${IMAGE_REGISTRY_RESOURCE_GROUP}"
+    }
+  }
+}

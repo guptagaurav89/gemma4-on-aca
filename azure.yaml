@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: gemma4-on-aca
+metadata:
+  template: gemma4-on-aca@0.0.1-beta
+
+infra:
+  provider: bicep
+  path: infra
+  module: main
+  parameters:
+    gpuProfileType:
+      value: ${GPU_PROFILE_TYPE}
+    modelId:
+      value: ${MODEL_ID}
+    servedModelName:
+      value: ${SERVED_MODEL_NAME}
+    huggingFaceToken:
+      value: ${HUGGING_FACE_TOKEN}
+    proxyAuthPassword:
+      value: ${PROXY_AUTH_PASSWORD}
+    imageRegistryResourceGroup:
+      value: ${IMAGE_REGISTRY_RESOURCE_GROUP}
+
+hooks:
+  preprovision:
+    windows:
+      shell: pwsh
+      run: hooks/select-gpu-model.ps1
+      interactive: true
+      continueOnError: false
+    posix:
+      shell: sh
+      run: hooks/select-gpu-model.sh
+      interactive: true
+      continueOnError: false
+  postprovision:
+    windows:
+      shell: pwsh
+      run: hooks/postprovision.ps1
+      interactive: true
+      continueOnError: true
+    posix:
+      shell: sh
+      run: hooks/postprovision.sh
+      interactive: true
+      continueOnError: true
